@@ -1,13 +1,9 @@
 package com.ysu.weibo.controller;
 
-import com.ysu.weibo.entity.DateRange;
-import com.ysu.weibo.entity.User;
+import com.ysu.weibo.entity.*;
 import com.ysu.weibo.service.UserService;
 import com.ysu.weibo.service.WeiBoUserService;
-import com.ysu.weibo.vo.DataVO;
-import com.ysu.weibo.vo.ProvinceBarVO;
-import com.ysu.weibo.vo.ProvinceDataVO;
-import com.ysu.weibo.vo.WeiBoAgeVO;
+import com.ysu.weibo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -65,23 +61,28 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/list")
-    public DataVO list(Integer page, Integer limit){
+    public DataVO<WeiBoUser> list(Integer page, Integer limit){
         return weiBoUserService.findData(page,limit);
     }
 
     @RequestMapping("/provinceDataVO")
     @ResponseBody
-    public ProvinceDataVO getProvinceDataVO(){
+    public DataVO<ProvinceItemVO> getProvinceDataVO(){
         return weiBoUserService.getProvinceDataVO();
     }
 
     @ResponseBody
     @RequestMapping("/WeiBoAgeDataVO")
-    public WeiBoAgeVO getWeiBoAgeDataVO(){
+    public DataVO<WeiBoAge> getWeiBoAgeDataVO(){
         return weiBoUserService.findWeiBoAge();
 
     }
 
+    @ResponseBody
+    @RequestMapping("/weiBoGenderDataVO")
+    public DataVO<Gender> getWeiBoGenderDataVO(){
+        return weiBoUserService.findWeiBoGender();
+    }
 
 
 }
