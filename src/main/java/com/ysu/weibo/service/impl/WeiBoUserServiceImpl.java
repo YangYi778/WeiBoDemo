@@ -15,6 +15,7 @@ import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.security.krb5.internal.crypto.Aes128;
 
 import java.sql.Wrapper;
 
@@ -79,21 +80,21 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
     }
 
     @Override
-    public DataVO<WeiBoAge> findWeiBoAge() {
+    public WeiBoAgeVO findWeiBoAge() {
         List<DateRange> list = setDateRange();
-        DataVO<WeiBoAge> dataVO = new DataVO<>();
-        dataVO.setCode(0);
-        dataVO.setMsg("");
-        dataVO.setCount(Long.parseLong(String.valueOf(list.size())));
-        List<WeiBoAge> data = new ArrayList<>();
+        List<String> peroids = new ArrayList<>();
+        List<Integer> values = new ArrayList<>();
+        WeiBoAgeVO weiBoAgeVO = new WeiBoAgeVO();
         for(DateRange range : list){
-            WeiBoAge weiBoAge = new WeiBoAge();
-            weiBoAge.setName(range.getStartDate() + "—" + range.getEndDate() + "年");
-            weiBoAge.setValue(weiBoUserMapper.findWeiBoAge(range));
-            data.add(weiBoAge);
+            //WeiBoAge weiBoAge = new WeiBoAge();
+            /*weiBoAge.setName(range.getStartDate() + "—" + range.getEndDate() + "年");
+            weiBoAge.setValue(weiBoUserMapper.findWeiBoAge(range));*/
+            peroids.add(range.getStartDate() + "—" + range.getEndDate() + "年");
+            values.add(weiBoUserMapper.findWeiBoAge(range));
         }
-        dataVO.setData(data);
-        return dataVO;
+        weiBoAgeVO.setPeroids(peroids);
+        weiBoAgeVO.setValues(values);
+        return weiBoAgeVO;
     }
 
     @Override

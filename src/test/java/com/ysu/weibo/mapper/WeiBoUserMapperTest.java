@@ -1,5 +1,6 @@
 package com.ysu.weibo.mapper;
 
+import com.ysu.weibo.service.WeiBoUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class WeiBoUserMapperTest {
 
+    @Autowired
+    private WeiBoUserService weiBoUserService;
+
+    @Test
+    public void testWeiBoAge(){
+        System.out.println(weiBoUserService.findWeiBoAge());
+    }
 //    @Autowired
 //    private WeiBoUserMapper weiBoUserMapper;
 //
