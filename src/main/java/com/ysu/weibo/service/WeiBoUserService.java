@@ -1,9 +1,6 @@
 package com.ysu.weibo.service;
 
-import com.ysu.weibo.entity.DateRange;
-import com.ysu.weibo.entity.Gender;
-import com.ysu.weibo.entity.WeiBoAge;
-import com.ysu.weibo.entity.WeiBoUser;
+import com.ysu.weibo.entity.*;
 import com.ysu.weibo.vo.*;
 
 import java.util.Date;
@@ -22,4 +19,6 @@ public interface WeiBoUserService {
     public WeiBoAgeVO findWeiBoAge();
 
     public DataVO<Gender> findWeiBoGender();
+
+    public LangVO findWeiBoLang();
 }

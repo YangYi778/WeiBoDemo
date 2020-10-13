@@ -1,6 +1,7 @@
 package com.ysu.weibo.controller;
 
 import com.ysu.weibo.service.WeiBoUserService;
+import com.ysu.weibo.vo.LangVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,5 +32,11 @@ public class WeiBoInfoController {
             return 777;
         }
         return 999;
+    }
+
+    @RequestMapping("/WeiBoLangScales")
+    @ResponseBody
+    public LangVO getWeiBoLangScales(){
+        return weiBoUserService.findWeiBoLang();
     }
 }

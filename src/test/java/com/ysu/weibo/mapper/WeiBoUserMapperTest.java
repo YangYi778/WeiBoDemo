@@ -18,6 +18,11 @@ class WeiBoUserMapperTest {
     public void testWeiBoAge(){
         System.out.println(weiBoUserService.findWeiBoAge());
     }
+
+    @Test
+    public void testWeiBoLangScales(){
+        System.out.println(weiBoUserService.findWeiBoLang());
+    }
 //    @Autowired
 //    private WeiBoUserMapper weiBoUserMapper;
 //

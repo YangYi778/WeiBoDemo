@@ -6,16 +6,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ysu.weibo.WeiboApplication;
-import com.ysu.weibo.entity.DateRange;
-import com.ysu.weibo.entity.Gender;
-import com.ysu.weibo.entity.WeiBoAge;
-import com.ysu.weibo.entity.WeiBoUser;
+import com.ysu.weibo.entity.*;
 import com.ysu.weibo.mapper.WeiBoUserMapper;
 import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.krb5.internal.crypto.Aes128;
+//import sun.security.krb5.internal.crypto.Aes128;
 
 import java.sql.Wrapper;
 
@@ -113,6 +110,29 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
         }
         dataVO.setData(list);
         return dataVO;
+    }
+
+    @Override
+    public LangVO findWeiBoLang() {
+        LangVO langVO = new LangVO();
+        List<Lang> list = weiBoUserMapper.findWeiBoLang();
+        List<String> names = new ArrayList<>();
+        List<Integer> values = new ArrayList<>();
+        List<Double> scales = new ArrayList<>();
+        Map<String,String> map = new HashMap<>();
+        map.put("zh-cn","简体中文");
+        map.put("zh-tw","繁体中文-台湾");
+        map.put("zh-hk","繁体中文-香港");
+        map.put("en","英语");
+        for (Lang lang : list){
+            names.add(map.get(lang.getName()));
+            values.add(lang.getValue());
+            scales.add(lang.getScale());
+        }
+        langVO.setNames(names);
+        langVO.setValues(values);
+        langVO.setScales(scales);
+        return langVO;
     }
 
     public List<DateRange> setDateRange(){
