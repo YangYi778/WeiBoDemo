@@ -1,6 +1,9 @@
 package com.ysu.weibo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ysu.weibo.entity.WeiBoUser;
 import com.ysu.weibo.mapper.WeiBoUserMapper;
@@ -8,6 +11,8 @@ import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.DataVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Wrapper;
 
 /**
  * Created by 万恶de亚撒西 on 2020/10/10.
@@ -30,6 +35,13 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
         dataVO.setData(result.getRecords());
 
         return dataVO;
+    }
+
+    @Override
+    public void deleteOne(String uid) {
+        LambdaQueryWrapper<WeiBoUser> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(WeiBoUser::getUid,uid);
+        weiBoUserMapper.delete(wrapper);
     }
 
 }
