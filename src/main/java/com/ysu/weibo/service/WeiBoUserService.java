@@ -19,7 +19,7 @@ public interface WeiBoUserService {
 
     public DataVO<ProvinceItemVO> getProvinceDataVO();
 
-    public DataVO<WeiBoAge> findWeiBoAge();
+    public WeiBoAgeVO findWeiBoAge();
 
     public DataVO<Gender> findWeiBoGender();
 }

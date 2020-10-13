@@ -73,9 +73,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/WeiBoAgeDataVO")
-    public DataVO<WeiBoAge> getWeiBoAgeDataVO(){
+    public WeiBoAgeVO getWeiBoAgeDataVO(){
         return weiBoUserService.findWeiBoAge();
-
     }
 
     @ResponseBody
