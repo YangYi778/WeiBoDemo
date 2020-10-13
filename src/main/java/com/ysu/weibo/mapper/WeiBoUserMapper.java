@@ -2,6 +2,7 @@ package com.ysu.weibo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ysu.weibo.entity.DateRange;
+import com.ysu.weibo.entity.Gender;
 import com.ysu.weibo.entity.WeiBoUser;
 import com.ysu.weibo.vo.ProvinceVO;
 import org.apache.ibatis.annotations.Select;
@@ -18,4 +19,7 @@ public interface WeiBoUserMapper extends BaseMapper<WeiBoUser> {
 
     @Select("SELECT count(*) FROM wei_bo_user WHERE created_at BETWEEN DATE_SUB(NOW(),INTERVAL #{endDate} YEAR) AND DATE_SUB(NOW() ,INTERVAL #{startDate} YEAR)")
     public Integer findWeiBoAge(DateRange dateRang);
+
+    @Select("select gender as name,count(*) as value from wei_bo_user GROUP BY gender")
+    public List<Gender> findWeiBoGender();
 }

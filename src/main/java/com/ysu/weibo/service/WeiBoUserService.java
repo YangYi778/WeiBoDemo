@@ -1,6 +1,7 @@
 package com.ysu.weibo.service;
 
 import com.ysu.weibo.entity.DateRange;
+import com.ysu.weibo.entity.Gender;
 import com.ysu.weibo.entity.WeiBoAge;
 import com.ysu.weibo.entity.WeiBoUser;
 import com.ysu.weibo.vo.*;
@@ -16,7 +17,9 @@ public interface WeiBoUserService {
     public DataVO<WeiBoUser> findData(Integer page, Integer limit);
     public void deleteOne(String uid);
 
-    public ProvinceDataVO getProvinceDataVO();
+    public DataVO<ProvinceItemVO> getProvinceDataVO();
 
-    public WeiBoAgeVO findWeiBoAge();
+    public DataVO<WeiBoAge> findWeiBoAge();
+
+    public DataVO<Gender> findWeiBoGender();
 }

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ysu.weibo.WeiboApplication;
 import com.ysu.weibo.entity.DateRange;
+import com.ysu.weibo.entity.Gender;
 import com.ysu.weibo.entity.WeiBoAge;
 import com.ysu.weibo.entity.WeiBoUser;
 import com.ysu.weibo.mapper.WeiBoUserMapper;
@@ -47,15 +48,15 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
     }
 
     @Override
-    public ProvinceDataVO getProvinceDataVO() {
+    public DataVO<ProvinceItemVO> getProvinceDataVO() {
 
-        ProvinceDataVO provinceDataVO = new ProvinceDataVO();
-        provinceDataVO.setCode(0);
-        provinceDataVO.setMsg("");
+        DataVO<ProvinceItemVO> dataVO = new DataVO<>();
+        dataVO.setCode(0);
+        dataVO.setMsg("");
 
         List<ProvinceVO> list = weiBoUserMapper.findAllProvinceDataVO();
         System.out.println("list.size()=======" + list.size());
-        provinceDataVO.setCount(Long.parseLong(String.valueOf(list.size())));
+        dataVO.setCount(Long.parseLong(String.valueOf(list.size())));
         System.out.println("list+++++++++" + list);
 //        List<String> names = new ArrayList<>();
 //        List<Integer> values = new ArrayList<>();
@@ -73,17 +74,17 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
             provinceItemVO.setValue(provinceVO.getCount());
             data.add(provinceItemVO);
         }
-        provinceDataVO.setData(data);
-        return provinceDataVO;
+        dataVO.setData(data);
+        return dataVO;
     }
 
     @Override
-    public WeiBoAgeVO findWeiBoAge() {
+    public DataVO<WeiBoAge> findWeiBoAge() {
         List<DateRange> list = setDateRange();
-        WeiBoAgeVO weiBoAgeVO = new WeiBoAgeVO();
-        weiBoAgeVO.setCode(0);
-        weiBoAgeVO.setMsg("");
-        weiBoAgeVO.setCount(Long.parseLong(String.valueOf(list.size())));
+        DataVO<WeiBoAge> dataVO = new DataVO<>();
+        dataVO.setCode(0);
+        dataVO.setMsg("");
+        dataVO.setCount(Long.parseLong(String.valueOf(list.size())));
         List<WeiBoAge> data = new ArrayList<>();
         for(DateRange range : list){
             WeiBoAge weiBoAge = new WeiBoAge();
@@ -91,8 +92,26 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
             weiBoAge.setValue(weiBoUserMapper.findWeiBoAge(range));
             data.add(weiBoAge);
         }
-        weiBoAgeVO.setData(data);
-        return weiBoAgeVO;
+        dataVO.setData(data);
+        return dataVO;
+    }
+
+    @Override
+    public DataVO<Gender> findWeiBoGender() {
+        DataVO<Gender> dataVO = new DataVO<>();
+        dataVO.setCode(0);
+        dataVO.setMsg("");
+        List<Gender> list = weiBoUserMapper.findWeiBoGender();
+        dataVO.setCount(Long.parseLong(String.valueOf(list.size())));
+        for(Gender gender : list){
+            if(gender.getName().equals("m")){
+                gender.setName("男");
+            }else{
+                gender.setName("女");
+            }
+        }
+        dataVO.setData(list);
+        return dataVO;
     }
 
     public List<DateRange> setDateRange(){
