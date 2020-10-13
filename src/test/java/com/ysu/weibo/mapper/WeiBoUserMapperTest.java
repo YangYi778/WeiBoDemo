@@ -10,11 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class WeiBoUserMapperTest {
 
-    @Autowired
-    private WeiBoUserMapper mapper;
-
-    @Test
-    void test(){
-        mapper.selectList(null).forEach(System.out::println);
-    }
+//    @Autowired
+//    private WeiBoUserMapper weiBoUserMapper;
+//
+//    @Test
+//    void test(){
+//        weiBoUserMapper.selectList(null).forEach(System.out::println);
+//    }
 }

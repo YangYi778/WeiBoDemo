@@ -1,12 +1,19 @@
 package com.ysu.weibo.controller;
 
+import com.ysu.weibo.entity.DateRange;
 import com.ysu.weibo.entity.User;
 import com.ysu.weibo.service.UserService;
 import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.DataVO;
+import com.ysu.weibo.vo.ProvinceBarVO;
+import com.ysu.weibo.vo.ProvinceDataVO;
+import com.ysu.weibo.vo.WeiBoAgeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 万恶de亚撒西 on 2020/10/10.
@@ -50,4 +57,20 @@ public class UserController {
     public DataVO list(Integer page, Integer limit){
         return weiBoUserService.findData(page,limit);
     }
+
+    @RequestMapping("/provinceDataVO")
+    @ResponseBody
+    public ProvinceDataVO getProvinceDataVO(){
+        return weiBoUserService.getProvinceDataVO();
+    }
+
+    @ResponseBody
+    @RequestMapping("/WeiBoAgeDataVO")
+    public WeiBoAgeVO getWeiBoAgeDataVO(){
+        return weiBoUserService.findWeiBoAge();
+
+    }
+
+
+
 }
