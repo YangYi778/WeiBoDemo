@@ -15,4 +15,6 @@ public interface UserService {
     public User findByUser(User user);
 
     public List<User> findAll();
+
+    public void save(User user);
 }

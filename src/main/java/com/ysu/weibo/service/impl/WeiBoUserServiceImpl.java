@@ -3,7 +3,6 @@ package com.ysu.weibo.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ysu.weibo.entity.WeiBoUser;
-import com.ysu.weibo.mapper.WeiBoUserMapper;
 import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.DataVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +30,5 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
 
         return dataVO;
     }
+
 }

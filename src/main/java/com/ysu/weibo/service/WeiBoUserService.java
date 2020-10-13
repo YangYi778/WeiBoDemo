@@ -8,4 +8,5 @@ import com.ysu.weibo.vo.DataVO;
  */
 public interface WeiBoUserService {
     public DataVO<WeiBoUser> findData(Integer page, Integer limit);
+
 }

@@ -132,7 +132,7 @@
             $('#loginBtn').val("正在登录...");
             $.ajax({
                 type:'post',
-                url: '/user/AjaxLogin',
+                url: '/AjaxLogin',
                 dataType:'html',
                 data:JSON.stringify(params),
                 contentType:'application/json',
@@ -145,7 +145,7 @@
                     // }
                     if(data == '999'){
                         layer.msg("登录成功！", {timer:1000, icon:6,shift:6},function () {});
-                        window.location.href = '/user/admin';
+                        window.location.href = '/admin';
                     }else{
                         layer.msg("当前用户不存在或用户名密码错误！", {timer:1000, icon:5, shift: 6},function () {});
                     }
@@ -193,7 +193,7 @@
                     var registerLoadIndex = layer.load(2);
                     $.ajax({
                         type:'post',
-                        url:'/user/AjaxRegister',
+                        url:'/AjaxRegister',
                         dataType:'json',
                         data:JSON.stringify(params),
                         contentType:'application/json',
