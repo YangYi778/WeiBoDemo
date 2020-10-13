@@ -1,6 +1,9 @@
 package com.ysu.weibo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ysu.weibo.WeiboApplication;
 import com.ysu.weibo.entity.DateRange;
@@ -11,6 +14,8 @@ import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Wrapper;
 
 import java.util.*;
 
@@ -122,4 +127,12 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
         provinceMap.put(100,"其他");
         return provinceMap;
     }
+
+    @Override
+    public void deleteOne(String uid) {
+        LambdaQueryWrapper<WeiBoUser> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(WeiBoUser::getUid,uid);
+        weiBoUserMapper.delete(wrapper);
+    }
+
 }

@@ -3,6 +3,7 @@
 
 <head>
 	<title></title>
+	<script src="jquery/jquery-3.5.1.min.js" charset="UTF-8"></script>
 	<link rel="stylesheet" href="layui/css/layui.css" media="all">
 </head>
 
@@ -56,7 +57,7 @@
 					field: 'screenName',
 					title: '昵称',
 					width: 150
-				},  {
+				}, {
 					field: 'gender',
 					title: '性别',
 					width: 150
@@ -121,23 +122,41 @@
 				case 'isAll':
 					layer.msg(checkStatus.isAll ? '全选' : '未全选')
 					break;
-			};
-		});
-		//监听工具条
-		table.on('tool(test)', function(obj) {
-			var data = obj.data;
-			if (obj.event === 'del') {
-				layer.confirm('真的删除行么', function(index) {
-					obj.del();
-					layer.close(index);
-				});
-			} else if (obj.event === 'edit') {
-				layer.alert('编辑行：<br>' + JSON.stringify(data))
 			}
+			;
 		});
+        //监听工具条
+        table.on('tool(test)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function(index) {
+                    layer.close(index);
+                    var loadIndex = layer.load(2);
+                    $.ajax({
+                        type: 'post',
+                        url: '/deleteOne',
+                        dataType:'html',
+                        data:{"uid" : data.uid},
+                        success:function (result) {
+                            if(result == "999"){
+                                layer.close(loadIndex);
+                                layer.msg("删除成功！", {timer:1000, icon:6,shift:6},function () {});
+                                obj.del();
+                            }else{
+                                layer.close(loadIndex);
+                                layer.msg("删除失败！", {timer:1000, icon:5, shift: 6},function () {});
+                            }
+                        }
+                    });
+                });
+            } else if (obj.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            }
+        });
 	});
+
+
 </script>
 
 </body>
-
 </html>

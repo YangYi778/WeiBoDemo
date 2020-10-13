@@ -52,6 +52,17 @@ public class UserController {
         return 999;         /*登陆成功*/
     }
 
+    @RequestMapping("/AjaxRegister")
+    @ResponseBody
+    public int AjaxRegister(@RequestBody User user){
+        System.out.println(user);
+        if((userService.findByUserName(user.getUserName())) != null){
+            return 777;     /*用户名重复*/
+        }
+        userService.save(user);
+        return 999;         /*注册成功*/
+    }
+
     @ResponseBody
     @RequestMapping("/list")
     public DataVO list(Integer page, Integer limit){

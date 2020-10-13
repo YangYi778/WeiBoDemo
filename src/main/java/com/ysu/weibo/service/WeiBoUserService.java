@@ -14,6 +14,7 @@ import java.util.Set;
  */
 public interface WeiBoUserService {
     public DataVO<WeiBoUser> findData(Integer page, Integer limit);
+    public void deleteOne(String uid);
 
     public ProvinceDataVO getProvinceDataVO();
 
