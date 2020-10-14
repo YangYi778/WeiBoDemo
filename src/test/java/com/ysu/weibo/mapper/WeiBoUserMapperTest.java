@@ -23,6 +23,11 @@ class WeiBoUserMapperTest {
     public void testWeiBoLangScales(){
         System.out.println(weiBoUserService.findWeiBoLang());
     }
+
+    @Test
+    public void testWeiBoZone() {
+        System.out.println(weiBoUserService.findWeiBoZone());
+    }
 //    @Autowired
 //    private WeiBoUserMapper weiBoUserMapper;
 //

@@ -135,6 +135,30 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
         return langVO;
     }
 
+    @Override
+    public List<ZoneVO> findWeiBoZone() {
+        List<ZoneVO> list = new ArrayList<>();
+        Zone zone = new Zone();
+        zone = weiBoUserMapper.findWeiBoZone();
+        Map<String,Integer> map = new HashMap<>();
+        map.put("华东",zone.getZone1());
+        map.put("华南",zone.getZone2());
+        map.put("华中",zone.getZone3());
+        map.put("华北",zone.getZone4());
+        map.put("西北",zone.getZone5());
+        map.put("西南",zone.getZone6());
+        map.put("东北",zone.getZone7());
+        map.put("海外",zone.getZone8());
+        map.put("其他",zone.getZone9());
+        for(String name : new String[]{"华东", "华南", "华中", "华北", "西北", "西南", "东北", "海外", "其他"}){
+            ZoneVO zoneVO = new ZoneVO();
+            zoneVO.setName(name);
+            zoneVO.setValue(map.get(name));
+            list.add(zoneVO);
+        }
+        return list;
+    }
+
     public List<DateRange> setDateRange(){
         List<DateRange> list = new ArrayList<>();
         list.add(new DateRange(0,1));

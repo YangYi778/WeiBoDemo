@@ -21,4 +21,6 @@ public interface WeiBoUserService {
     public DataVO<Gender> findWeiBoGender();
 
     public LangVO findWeiBoLang();
+
+    public List<ZoneVO> findWeiBoZone();
 }

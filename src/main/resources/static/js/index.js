@@ -574,14 +574,14 @@
 // 饼形图1
 (function() {
   $.ajax({
-    "url": "/WeiBoAgeDataVO",
+    "url": "/WeiBoZoneVO",
     "type": "POST",
     "success": function(result) {
       // 1. 实例化对象
       var myChart = echarts.init(document.querySelector(".pie .chart"));
       // 2.指定配置
       var option = {
-        color: ["#D7DF01", "#01A9DB", "#04B45F", "#585858", "#06a0ab"],
+        color: ["#FF0066", "#FFCC33", "006600", "#66FFFF", "#00FF99","#0000FF","#9900FF","#CC00FF","#FFFFFF"],
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -615,7 +615,7 @@
           labelLine: {
             show: false
           },
-          data: result.data
+          data: result
         }]
       };
 

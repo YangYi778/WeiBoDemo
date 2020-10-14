@@ -2,12 +2,15 @@ package com.ysu.weibo.controller;
 
 import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.LangVO;
+import com.ysu.weibo.vo.ZoneVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author Qiantao-H
@@ -39,4 +42,8 @@ public class WeiBoInfoController {
     public LangVO getWeiBoLangScales(){
         return weiBoUserService.findWeiBoLang();
     }
+
+    @RequestMapping("/WeiBoZoneVO")
+    @ResponseBody
+    public List<ZoneVO> getWeiBoZoneVO() {return weiBoUserService.findWeiBoZone();}
 }
