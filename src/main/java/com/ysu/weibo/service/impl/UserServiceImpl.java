@@ -1,6 +1,7 @@
 package com.ysu.weibo.service.impl;
 
 import com.ysu.weibo.entity.User;
+import com.ysu.weibo.entity.WeiBoUser;
 import com.ysu.weibo.mapper.UserMapper;
 import com.ysu.weibo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<WeiBoUser> findAll() {
         return userMapper.findAll();
     }
 

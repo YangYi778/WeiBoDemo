@@ -1,6 +1,7 @@
 package com.ysu.weibo.service;
 
 import com.ysu.weibo.entity.User;
+import com.ysu.weibo.entity.WeiBoUser;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserService {
 
     public User findByUser(User user);
 
-    public List<User> findAll();
+    public List<WeiBoUser> findAll();
 
     public void save(User user);
 }
