@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/echarts/3.7.0/echarts.simple.js"></script>
+    <script src="js/echarts-wordcloud.js"></script>
+    <script src="js/flexible.js"></script>
+<!--    <script src="js/echarts.min.js"></script>-->
+    <!-- 先引入jquery -->
+    <script src="js/jquery.js"></script>
+
+</head>
+<body>
+    <div id="main" style="width: 1680px;height: 950px"></div>
+    <script type="text/javascript">
+        $(function(){
+            $.ajax({
+                "url":"/getWordCloudDataVO",
+                "type":"POST",
+                "data":{"event": "青岛疫情"},
+                "success":function(res){
+                    //基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main'));
+                    //指定图标的配置项和数据
+                    // 词云图需要额外引入 词云图js
+                    // https://oisanjavax.github.io/echarts-wordcloud/dist/echarts-wordcloud.min.js
+                    // mock数据
+                    let data = res.data
+                    console.log("data==="+data);
+                    // 随机颜色
+                    let randcolor = () => {
+                        let r = 100 + ~~(Math.random() * 100);
+                        let g = 135 + ~~(Math.random() * 100);
+                        let b = 100 + ~~(Math.random() * 100);
+                        return `rgb(${r}, ${g}, ${b})`
+                    }
+
+                    option = {
+                        backgroundColor:'rgba(255,255,255,.5)',
+                        tooltip: {
+                            trigger: 'item',
+                            padding: [10, 15],
+                            textStyle: {
+                                fontSize: 20
+                            },
+                            formatter: params => {
+                                const { name, value } = params
+
+                                return `
+                    关键词：${name} <br/>
+                    数量：${value}
+                `
+                            }
+                        },
+                        series: [{
+                            type: 'wordCloud',
+                            gridSize: 20,
+                            sizeRange: [12, 50],
+                            rotationRange: [0, 0],
+                            shape: 'circle',
+                            textStyle: {
+                                normal: {
+                                    color: params => {
+                                        return randcolor()
+                                    }
+                                },
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowColor: '#333'
+                                }
+                            },
+                            data: data
+                        }]
+                    };
+                    //使用指定的配置项和数据显示图表
+                    myChart.setOption(option);
+                    // 监听浏览器缩放，图表对象调用缩放resize函数
+                    window.addEventListener("resize", function() {
+                        myChart.resize();
+                    });
+                }
+            });
+        })
+    </script>
+</body>
+</html>
