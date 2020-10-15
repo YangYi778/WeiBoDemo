@@ -23,4 +23,8 @@ public interface WeiBoUserService {
     public LangVO findWeiBoLang();
 
     public List<ZoneVO> findWeiBoZone();
+
+    public void deleteInvaildDate();
+
+    public void deleteRepeat();
 }

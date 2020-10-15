@@ -52,4 +52,10 @@ public interface WeiBoUserMapper extends BaseMapper<WeiBoUser> {
             ",(SELECT COUNT(*) AS Zone9 FROM wei_bo_user WHERE province IN (100)) i")
     public Zone findWeiBoZone();
 
+    @Select("delete from wei_bo_user where screen_name is null or location is null")
+    public void deleteInvaildDate();
+
+    @Select("DELETE FROM wei_bo_user WHERE id Not in (SELECT a.id FROM (Select Max(id) as id From wei_bo_user Group By uid) a)")
+    public void deleteRepeat();
+
 }

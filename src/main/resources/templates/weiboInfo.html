@@ -16,6 +16,7 @@
 		<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
 		<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
 		<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+		<button class="layui-btn layui-btn-sm" lay-event="check">数据清洗</button>
 	</div>
 </script>
 <script type="text/html" id="barDemo">
@@ -121,6 +122,19 @@
 					break;
 				case 'isAll':
 					layer.msg(checkStatus.isAll ? '全选' : '未全选')
+					break;
+				case 'check':
+					$.ajax({
+						type: 'post',
+						url: '/deleteRepeat',
+						success:function (result) {
+							if(result.success == "999"){
+								layer.msg("去除重复数据"+result.repeatCount+"条,去除无用数据"+result.invalidCount+"条!", {timer:1000, icon:6,shift:6},function () {});
+							}else{
+								layer.msg("处理失败！", {timer:1000, icon:5, shift: 6},function () {});
+							}
+						}
+					});
 					break;
 			}
 			;

@@ -9,8 +9,8 @@
         select * from user where userName = #{userName}
     </select>
 
-    <select id="findAll" resultType="User">
-        select * from user
+    <select id="findAll" resultType="WeiBoUser">
+        select * from wei_bo_user
     </select>
 
     <insert id="save" parameterType="User">

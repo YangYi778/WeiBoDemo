@@ -1,12 +1,12 @@
 package com.ysu.weibo.controller;
 
+import com.ysu.weibo.entity.GuoLvResult;
+import com.ysu.weibo.service.UserService;
 import com.ysu.weibo.service.WeiBoUserService;
 import com.ysu.weibo.vo.LangVO;
 import com.ysu.weibo.vo.ZoneVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +23,8 @@ public class WeiBoInfoController {
 
     @Autowired
     private WeiBoUserService weiBoUserService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/deleteOne")
     @ResponseBody
@@ -46,4 +48,37 @@ public class WeiBoInfoController {
     @RequestMapping("/WeiBoZoneVO")
     @ResponseBody
     public List<ZoneVO> getWeiBoZoneVO() {return weiBoUserService.findWeiBoZone();}
-}
+
+    @RequestMapping("/deleteRepeat")
+    @ResponseBody
+    public GuoLvResult deleteRepeat(){
+        System.out.println("@@@@");
+        int count1 = 0;
+        int count2 = 0;
+        GuoLvResult guoLvResult = new GuoLvResult();
+        try {
+            /*
+            * 去无用
+            * */
+            count1 = userService.findAll().size();
+            weiBoUserService.deleteInvaildDate();
+            count2 = userService.findAll().size();
+            guoLvResult.setInvalidCount(count1-count2);
+            /*
+            * 去重复
+            * */
+            count1 = userService.findAll().size();
+            weiBoUserService.deleteRepeat();
+            count2 = userService.findAll().size();
+            guoLvResult.setRepeatCount(count1-count2);
+
+            guoLvResult.setSuccess(999);
+        }catch (Exception e){
+            System.out.println("删除失败");
+            guoLvResult.setSuccess(777);
+            return guoLvResult;
+        }
+        return guoLvResult;
+    }
+    }
+

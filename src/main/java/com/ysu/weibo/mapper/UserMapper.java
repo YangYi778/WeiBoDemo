@@ -2,6 +2,7 @@ package com.ysu.weibo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ysu.weibo.entity.User;
+import com.ysu.weibo.entity.WeiBoUser;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface UserMapper {
 
     public User findByUser(User user);
 
-    public List<User> findAll();
+    public List<WeiBoUser> findAll();
 
     public void save(User user);
 

@@ -199,4 +199,13 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
         weiBoUserMapper.delete(wrapper);
     }
 
+    @Override
+    public void deleteInvaildDate() {
+        weiBoUserMapper.deleteInvaildDate();
+    }
+
+    @Override
+    public void deleteRepeat(){
+        weiBoUserMapper.deleteRepeat();
+    }
 }
