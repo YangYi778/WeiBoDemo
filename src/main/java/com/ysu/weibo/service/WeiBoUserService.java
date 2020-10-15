@@ -3,6 +3,7 @@ package com.ysu.weibo.service;
 import com.ysu.weibo.entity.*;
 import com.ysu.weibo.vo.*;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -23,4 +24,8 @@ public interface WeiBoUserService {
     public LangVO findWeiBoLang();
 
     public List<ZoneVO> findWeiBoZone();
+
+    public DataVO<WordCloudVO> findWordCloud(String event);
+
+    public HotTopicVO findHotTopic(String event);
 }

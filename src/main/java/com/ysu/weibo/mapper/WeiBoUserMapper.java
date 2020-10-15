@@ -52,4 +52,10 @@ public interface WeiBoUserMapper extends BaseMapper<WeiBoUser> {
             ",(SELECT COUNT(*) AS Zone9 FROM wei_bo_user WHERE province IN (100)) i")
     public Zone findWeiBoZone();
 
+    @Select("select word,count from word_yun where event = #{event}")
+    public List<HotYun3D> findWordCloudData(String event);
+
+    @Select("select hotdate,hotvalue from event_hot where eventname = #{event}")
+    public List<Hot3D> findHot3DData(String event);
+
 }

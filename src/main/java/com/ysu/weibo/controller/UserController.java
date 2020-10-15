@@ -83,5 +83,18 @@ public class UserController {
         return weiBoUserService.findWeiBoGender();
     }
 
+    @ResponseBody
+    @RequestMapping("/getWordCloudDataVO")
+    public DataVO<WordCloudVO> getWordCloudDataVO(@RequestParam("event")String event){
+        return weiBoUserService.findWordCloud(event);
+    }
+
+    @ResponseBody
+    @RequestMapping("/getHotTopicDataVO")
+    public HotTopicVO getHotTopicDataVO(@RequestParam("event")String event){
+        System.out.println("event==="+event);
+        return weiBoUserService.findHotTopic(event);
+    }
+
 
 }

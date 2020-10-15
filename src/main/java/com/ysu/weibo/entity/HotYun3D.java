@@ -10,6 +10,7 @@ import lombok.Data;
 
 @Data
 public class HotYun3D {
+    private Integer id;
     private String word;
     private Integer count;
 }
