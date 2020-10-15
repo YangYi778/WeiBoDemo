@@ -24,6 +24,10 @@ public interface WeiBoUserService {
 
     public List<ZoneVO> findWeiBoZone();
 
+    public DataVO<WordCloudVO> findWordCloud(String event);
+
+    public HotTopicVO findHotTopic(String event);
+
     public void deleteInvaildDate();
 
     public void deleteRepeat();

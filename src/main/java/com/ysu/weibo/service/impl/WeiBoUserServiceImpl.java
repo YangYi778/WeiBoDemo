@@ -159,6 +159,39 @@ public class WeiBoUserServiceImpl implements WeiBoUserService {
         return list;
     }
 
+    @Override
+    public DataVO<WordCloudVO> findWordCloud(String event) {
+        DataVO<WordCloudVO> dataVO = new DataVO<>();
+        dataVO.setCode(0);
+        dataVO.setMsg("");
+        List<HotYun3D> list = weiBoUserMapper.findWordCloudData(event);
+        List<WordCloudVO> wordCloudVOList = new ArrayList<>();
+        for(HotYun3D hotYun3D : list){
+            WordCloudVO wordCloudVO = new WordCloudVO();
+            wordCloudVO.setName(hotYun3D.getWord());
+            wordCloudVO.setValue(hotYun3D.getCount());
+            wordCloudVOList.add(wordCloudVO);
+        }
+        dataVO.setCount(Long.parseLong(String.valueOf(list.size())));
+        dataVO.setData(wordCloudVOList);
+        return dataVO;
+    }
+
+    @Override
+    public HotTopicVO findHotTopic(String event) {
+        HotTopicVO hotTopicVO = new HotTopicVO();
+        List<Hot3D> hot3DList = weiBoUserMapper.findHot3DData(event);
+        List<String> hotdates = new ArrayList<>();
+        List<Integer> hotvalues = new ArrayList<>();
+        for(Hot3D hot3D : hot3DList){
+            hotdates.add(hot3D.getHotdate());
+            hotvalues.add(hot3D.getHotvalue());
+        }
+        hotTopicVO.setHotdate(hotdates);
+        hotTopicVO.setHotvalue(hotvalues);
+        return hotTopicVO;
+    }
+
     public List<DateRange> setDateRange(){
         List<DateRange> list = new ArrayList<>();
         list.add(new DateRange(0,1));
